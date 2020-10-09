@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { ITodo } from "../entities/ITodo";
-import { IHeader } from "../entities/IHeader";
 import {
   getAllActiveTodos,
   getAllHeaders,
@@ -12,8 +11,8 @@ import TableRow from "./TodoTableRow";
 
 const TestTable = () => {
   const [todos, setTodos] = useState(getAllActiveTodos);
-  const [headers, setHeaders] = useState(getAllHeaders);
-  const [doneHeaders, setDoneHeaders] = useState(getAllDoneHeaders);
+  const [headers] = useState(getAllHeaders);
+  const [doneHeaders] = useState(getAllDoneHeaders);
   const [doneTodos, setDoneTodos] = useState(getAllDoneTodos);
 
   const updateTodos = (todo: ITodo) => {
@@ -49,51 +48,6 @@ const TestTable = () => {
     setTodos(del);
     setDoneTodos(del2);
   };
-  const handleSort = (item: IHeader, todos: ITodo[]) => {
-    if (
-      item.id !== headers[0].id &&
-      item.id !== headers[headers.length - 1].id
-    ) {
-      let sortedArray = [];
-      if (item.sort === "asc") {
-        sortedArray = _.orderBy(todos, [item.title.toLowerCase()], "desc");
-        item.sort = "desc";
-        item.isSort = true;
-      } else {
-        sortedArray = _.orderBy(todos, [item.title.toLowerCase()], "asc");
-        item.sort = "asc";
-        item.isSort = true;
-      }
-      headers.forEach((head) =>
-        head.id !== item.id ? (head.isSort = false) : ""
-      );
-      setHeaders(headers);
-      setTodos(sortedArray);
-    }
-  };
-  const handleSortDoneHeader = (item: IHeader, donetodos: ITodo[]) => {
-    console.log(item);
-    if (
-      item.id !== doneHeaders[0].id &&
-      item.id !== doneHeaders[doneHeaders.length - 1].id
-    ) {
-      let sortedArray = [];
-      if (item.sort === "asc") {
-        sortedArray = _.orderBy(donetodos, [item.title.toLowerCase()], "desc");
-        item.sort = "desc";
-        item.isSort = true;
-      } else {
-        sortedArray = _.orderBy(donetodos, [item.title.toLowerCase()], "asc");
-        item.sort = "asc";
-        item.isSort = true;
-      }
-      doneHeaders.forEach((head) =>
-        head.id !== item.id ? (head.isSort = false) : ""
-      );
-      setDoneHeaders(doneHeaders);
-      setDoneTodos(sortedArray);
-    }
-  };
 
   const handleNewRow = () => {
     const newtodo: ITodo = {
@@ -116,7 +70,6 @@ const TestTable = () => {
             <tr>
               {headers.map((header) => (
                 <th
-                  onClick={() => handleSort(header, todos)}
                   key={header.id}
                   className={`${
                     header.id === 11 ? "text-center" : ""
@@ -163,7 +116,6 @@ const TestTable = () => {
             <tr>
               {doneHeaders.map((doneheader) => (
                 <th
-                  onClick={() => handleSortDoneHeader(doneheader, doneTodos)}
                   key={doneheader.id}
                   className={`${
                     doneheader.id === 111 ? "text-center" : ""
