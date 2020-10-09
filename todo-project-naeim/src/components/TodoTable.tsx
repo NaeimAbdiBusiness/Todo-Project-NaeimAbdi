@@ -4,7 +4,6 @@ import {
   getAllActiveTodos,
   getAllHeaders,
   getAllDoneTodos,
-  getAllDoneHeaders,
 } from "../services/fakeTodos";
 import _ from "lodash";
 import TableRow from "./TodoTableRow";
@@ -12,7 +11,6 @@ import TableRow from "./TodoTableRow";
 const TestTable = () => {
   const [todos, setTodos] = useState(getAllActiveTodos);
   const [headers] = useState(getAllHeaders);
-  const [doneHeaders] = useState(getAllDoneHeaders);
   const [doneTodos, setDoneTodos] = useState(getAllDoneTodos);
 
   const updateTodos = (todo: ITodo) => {
@@ -114,43 +112,11 @@ const TestTable = () => {
             </tr>
 
             <tr>
-              {doneHeaders.map((doneheader) => (
-                <th
-                  key={doneheader.id}
-                  className={`${
-                    doneheader.id === 111 ? "text-center" : ""
-                  } select-none px-3 py-2 border-b-2 border-gray-300 text-left  leading-4 text-blue-500 tracking-wider`}
-                >
-                  {doneheader.title}
-                  {doneheader.isSort === true
-                    ? (doneheader.sort === "asc" ? "+" : "") +
-                      (doneheader.sort === "desc" ? "-" : "")
-                    : ""}
-                </th>
-              ))}
-
               <th className=" px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider"></th>
               <th className="px-6 py-3 border-b-2 border-gray-300"></th>
             </tr>
-            {doneTodos.map((todo) => (
-              <TableRow
-                key={todo.id}
-                todo={todo}
-                handleDelete={handleDelete}
-                updateTodos={updateTodos}
-              />
-            ))}
           </tbody>
         </table>
-        <div className="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans">
-          <div>
-            <p className=" mb-2 text-sm leading-5 text-blue-700">
-              Showing
-              <span className="font-medium"> {doneTodos.length} </span>
-              <span className="font-medium">records</span>
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   );

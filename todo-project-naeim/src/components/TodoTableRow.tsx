@@ -13,7 +13,7 @@ const TableRow = ({
   const [category, setCategory] = useState(todo.category);
   const [title, setTitle] = useState(todo.title);
   const [description, setDescription] = useState(todo.description);
-  const [status, setStatus] = useState(todo.status);
+  const [status] = useState(todo.status);
   const [newRow, setNewrow] = useState(todo.newRow);
 
   const isFirstRun = useRef(true);
@@ -74,12 +74,7 @@ const TableRow = ({
     <tr className="">
       <td className="px-5 text-center   whitespace-no-wrap border-b  border-gray-500">
         <div className="text-sm leading-5 text-gray-800 ">
-          <input
-            hidden={iseditable}
-            checked={status}
-            type="checkbox"
-            onChange={() => setStatus((prev) => !prev)}
-          ></input>
+          <input type="checkbox"></input>
         </div>
       </td>
       <td
