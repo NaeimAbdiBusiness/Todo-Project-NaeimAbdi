@@ -176,14 +176,7 @@ const TableRow = ({
         className={
           "  whitespace-no-wrap text-left border-b border-gray-500 text-sm leading-5"
         }
-      >
-        <button
-          onClick={() => handleDelete(todo)}
-          className="px-5 py-2 border-red-500 border text-red-500 rounded transition duration-300 hover:bg-red-700 hover:text-white focus:outline-none"
-        >
-          Delete
-        </button>
-      </td>
+      ></td>
     </tr>
   );
 };
